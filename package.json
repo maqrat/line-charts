@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/maqrat/line-charts/issues"
   },
-  "homepage": "https://github.com/maqrat/line-charts#readme"
+  "homepage": "https://github.com/maqrat/line-charts#readme",
+  "dependencies": {
+    "angular": "^1.4.0",
+    "d3": "^3.5.5",
+    "react": "^0.14.8",
+    "react-dom": "^0.14.8"
+  }
 }
