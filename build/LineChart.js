@@ -1505,9 +1505,9 @@ var n3Charts;
                 };
                 var updateItem = function (s) {
                     s.select('.series-label')
-                        .text(function (d) { return d.label; });
+                        .html(function (d) { return d.label; });
                     s.select('.y-value')
-                        .text(function (d) { return d.value; });
+                        .html(function (d) { return d.value; });
                     return s;
                 };
                 var items = this.svg.selectAll('.tooltip-item')
