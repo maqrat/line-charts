@@ -1,8 +1,8 @@
 var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+        for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
 var n3Charts;
 (function (n3Charts) {
     var svg;
@@ -994,23 +994,23 @@ var n3Charts;
             Data.getMinDistance = function (data, axis, key, range) {
                 if (key === void 0) { key = 'x'; }
                 return d3.min(
-                // Compute the minimum difference along an axis on all series
-                data.map(function (series) {
-                    // Compute minimum delta
-                    return series
-                        .map(function (d) { return axis.scale(d[key]); })
-                        .filter(function (d) {
-                        return range ? d >= range[0] && d <= range[1] : true;
-                    })
-                        .reduce(function (prev, d, i, arr) {
-                        // Get the difference from the current value
-                        // with the previous value in the array
-                        var diff = i > 0 ? d - arr[i - 1] : Number.MAX_VALUE;
-                        // Return the new difference if it is smaller
-                        // than the previous difference
-                        return diff < prev ? diff : prev;
-                    }, Number.MAX_VALUE);
-                }));
+                    // Compute the minimum difference along an axis on all series
+                    data.map(function (series) {
+                        // Compute minimum delta
+                        return series
+                            .map(function (d) { return axis.scale(d[key]); })
+                            .filter(function (d) {
+                                return range ? d >= range[0] && d <= range[1] : true;
+                            })
+                            .reduce(function (prev, d, i, arr) {
+                                // Get the difference from the current value
+                                // with the previous value in the array
+                                var diff = i > 0 ? d - arr[i - 1] : Number.MAX_VALUE;
+                                // Return the new difference if it is smaller
+                                // than the previous difference
+                                return diff < prev ? diff : prev;
+                            }, Number.MAX_VALUE);
+                    }));
             };
             return Data;
         }());
@@ -1050,10 +1050,10 @@ var n3Charts;
                 // @src: http://stackoverflow.com/a/2117523
                 return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'
                     .replace(/[xy]/g, function (c) {
-                    var r = Math.random() * 16 | 0;
-                    var v = c === 'x' ? r : (r & 0x3 | 0x8);
-                    return v.toString(16);
-                });
+                        var r = Math.random() * 16 | 0;
+                        var v = c === 'x' ? r : (r & 0x3 | 0x8);
+                        return v.toString(16);
+                    });
             };
             return UUID;
         }());
@@ -1261,9 +1261,9 @@ var n3Charts;
                 var y = yScale.invert(event.clientY - top - dim.margin.top);
                 return { y: y, x: x };
             };
-            Container.prototype.update = function () {
+            Container.prototype.update = function (data, options) {
                 this.updateRoot();
-                this.updateContainer();
+                this.updateContainer(options);
             };
             Container.prototype.destroy = function () {
                 this.destroyRoot();
@@ -1301,31 +1301,32 @@ var n3Charts;
                 this.data = this.vis
                     .append('g')
                     .attr({
-                    'class': 'data',
-                    'clip-path': 'url(#' + this.clippingPathId + ')'
-                });
+                        'class': 'data',
+                        'clip-path': 'url(#' + this.clippingPathId + ')'
+                    });
                 this.overlay = this.vis
                     .append('g')
                     .attr('class', 'overlay');
                 this.symbols = this.overlay
                     .append('g')
                     .attr({
-                    'class': 'symbols',
-                    'clip-path': 'url(#' + this.clippingPathId + ')'
-                });
+                        'class': 'symbols',
+                        'clip-path': 'url(#' + this.clippingPathId + ')'
+                    });
             };
-            Container.prototype.updateContainer = function () {
+            Container.prototype.updateContainer = function (options) {
+                this.dim.updateMargins(options);
                 this.vis
                     .attr({
-                    'width': this.dim.innerWidth,
-                    'height': Math.max(this.dim.innerHeight, 0),
-                    'transform': 'translate(' + this.dim.margin.left + ', ' + this.dim.margin.top + ')'
-                });
+                        'width': this.dim.innerWidth,
+                        'height': Math.max(this.dim.innerHeight, 0),
+                        'transform': 'translate(' + this.dim.margin.left + ', ' + this.dim.margin.top + ')'
+                    });
                 d3.select(this.element).select('#clipping-rect')
                     .attr({
-                    'width': Math.max(this.dim.innerWidth, 0),
-                    'height': Math.max(this.dim.innerHeight, 0)
-                });
+                        'width': Math.max(this.dim.innerWidth, 0),
+                        'height': Math.max(this.dim.innerHeight, 0)
+                    });
             };
             Container.prototype.getDimensions = function () {
                 return this.dim;
@@ -1495,8 +1496,8 @@ var n3Charts;
                     s.append('div')
                         .attr({ 'class': 'color-dot' })
                         .style({
-                        'background-color': function (d) { return d.color; }
-                    });
+                            'background-color': function (d) { return d.color; }
+                        });
                     s.append('div')
                         .attr({ 'class': 'series-label' });
                     s.append('div')
@@ -1580,10 +1581,10 @@ var n3Charts;
                 }
                 this.svg
                     .style({
-                    'left': (leftOffset + margin.left + xAxis.scale(lastRow.row.x) + xOffset) + 'px',
-                    'top': (topOffset + margin.top) + 'px',
-                    'transform': transform
-                });
+                        'left': (leftOffset + margin.left + xAxis.scale(lastRow.row.x) + xOffset) + 'px',
+                        'top': (topOffset + margin.top) + 'px',
+                        'transform': transform
+                    });
                 return;
             };
             Tooltip.prototype.updateLinePosition = function (rows) {
@@ -2086,21 +2087,21 @@ var n3Charts;
                 };
                 container.svg
                     .on(k('mousedown'), function () {
-                    var event = d3.event;
-                    // We don't want to process non-left click events
-                    if (event.button !== 0) {
-                        return;
-                    }
-                    if (event.altKey) {
-                        turnBackOn = _this.factoryMgr.turnFactoriesOff(['tooltip']);
-                        _this.isActive = true;
-                        _this.eventMgr.on(k('window-mouseup'), onMouseUp);
-                        _a = d3.mouse(event.currentTarget), xStart = _a[0], yStart = _a[1];
-                        xStart = _this.xStartFn(xStart);
-                        yStart = _this.yStartFn(yStart);
-                    }
-                    var _a;
-                }).on(k('mousemove'), function () {
+                        var event = d3.event;
+                        // We don't want to process non-left click events
+                        if (event.button !== 0) {
+                            return;
+                        }
+                        if (event.altKey) {
+                            turnBackOn = _this.factoryMgr.turnFactoriesOff(['tooltip']);
+                            _this.isActive = true;
+                            _this.eventMgr.on(k('window-mouseup'), onMouseUp);
+                            _a = d3.mouse(event.currentTarget), xStart = _a[0], yStart = _a[1];
+                            xStart = _this.xStartFn(xStart);
+                            yStart = _this.yStartFn(yStart);
+                        }
+                        var _a;
+                    }).on(k('mousemove'), function () {
                     if (_this.isActive) {
                         _a = d3.mouse(d3.event.currentTarget), xEnd = _a[0], yEnd = _a[1];
                         xEnd = _this.xEndFn(xEnd);
@@ -2205,19 +2206,19 @@ var n3Charts;
                 };
                 container.svg
                     .on(k('mousedown'), function () {
-                    var event = d3.event;
-                    // We don't want to process non-left click events
-                    if (event.button !== 0) {
-                        return;
-                    }
-                    if (!event.altKey) {
-                        _this.isActive = true;
-                        _a = d3.mouse(event.currentTarget), xStart = _a[0], yStart = _a[1];
-                        _this.eventMgr.on(k('window-mouseup'), onMouseUp);
-                        _this.eventMgr.on(k('window-mousemove'), onMouseMove);
-                    }
-                    var _a;
-                });
+                        var event = d3.event;
+                        // We don't want to process non-left click events
+                        if (event.button !== 0) {
+                            return;
+                        }
+                        if (!event.altKey) {
+                            _this.isActive = true;
+                            _a = d3.mouse(event.currentTarget), xStart = _a[0], yStart = _a[1];
+                            _this.eventMgr.on(k('window-mouseup'), onMouseUp);
+                            _this.eventMgr.on(k('window-mousemove'), onMouseMove);
+                        }
+                        var _a;
+                    });
             };
             return Pan;
         }(Factory.BaseFactory));
@@ -2308,9 +2309,9 @@ var n3Charts;
                         selection
                             .attr('class', 'hline')
                             .style({
-                            'opacity': 0,
-                            'stroke': function (o) { return o.color; }
-                        });
+                                'opacity': 0,
+                                'stroke': function (o) { return o.color; }
+                            });
                     };
                     var update = function (selection) {
                         selection.attr({
@@ -2338,8 +2339,8 @@ var n3Charts;
                             .call(this.factoryMgr.getBoundFunction('transitions', 'exit'))
                             .style('opacity', 0)
                             .each('end', function () {
-                            d3.select(this).remove();
-                        });
+                                d3.select(this).remove();
+                            });
                     }
                     else {
                         hline.enter()
@@ -2394,9 +2395,9 @@ var n3Charts;
                         selection
                             .attr('class', 'vline')
                             .style({
-                            'opacity': 0,
-                            'stroke': function (o) { return o.color; }
-                        });
+                                'opacity': 0,
+                                'stroke': function (o) { return o.color; }
+                            });
                     };
                     var update = function (selection) {
                         selection.attr({
@@ -2424,8 +2425,8 @@ var n3Charts;
                             .call(this.factoryMgr.getBoundFunction('transitions', 'exit'))
                             .style('opacity', 0)
                             .each('end', function () {
-                            d3.select(this).remove();
-                        });
+                                d3.select(this).remove();
+                            });
                     }
                     else {
                         vline.enter()
@@ -2507,10 +2508,10 @@ var n3Charts;
                     groups.enter()
                         .append('g')
                         .attr({
-                        class: function (d) {
-                            return _this.type + SeriesFactory.seriesClassSuffix + ' ' + d.id;
-                        }
-                    });
+                            class: function (d) {
+                                return _this.type + SeriesFactory.seriesClassSuffix + ' ' + d.id;
+                            }
+                        });
                     // Update all existing series groups
                     this.styleSeries(groups);
                     this.updateSeries(groups, series);
@@ -2597,8 +2598,8 @@ var n3Charts;
                             .call(this.factoryMgr.getBoundFunction('transitions', 'exit'))
                             .call(initPoint)
                             .each('end', function () {
-                            d3.select(this).remove();
-                        });
+                                d3.select(this).remove();
+                            });
                     }
                     else {
                         dots.enter()
@@ -2675,8 +2676,8 @@ var n3Charts;
                             .call(this.factoryMgr.getBoundFunction('transitions', 'exit'))
                             .attr('d', function (d) { return initLine(d); })
                             .each('end', function () {
-                            d3.select(this).remove();
-                        });
+                                d3.select(this).remove();
+                            });
                     }
                     else {
                         line.enter()
@@ -2868,8 +2869,8 @@ var n3Charts;
                             .call(this.factoryMgr.getBoundFunction('transitions', 'exit'))
                             .call(initCol)
                             .each('end', function () {
-                            d3.select(this).remove();
-                        });
+                                d3.select(this).remove();
+                            });
                     }
                     else {
                         cols.enter()
@@ -3129,7 +3130,8 @@ var n3Charts;
                 ]);
                 factoryMgr.all().forEach(function (f) { return f.instance.init(f.key, eventMgr, factoryMgr); });
                 var deferredCreation = scope.options === undefined;
-                var updateAll = function () {
+                var updateAll = function (asd) {
+
                     options = new n3Charts.Options.Options(angular.copy(scope.options));
                     data = new n3Charts.Utils.Data(scope.data);
                     if (deferredCreation) {
@@ -3201,6 +3203,6 @@ var n3Charts;
 // Create the angular module
 angular.module('n3-line-chart', [])
     .directive('linechart', [
-    '$window', '$parse', '$timeout', '$rootScope',
-    function ($window, $parse, $timeout, $rootScope) { return new n3Charts.LineChart($window, $parse, $timeout, $rootScope); }
-]);
+        '$window', '$parse', '$timeout', '$rootScope',
+        function ($window, $parse, $timeout, $rootScope) { return new n3Charts.LineChart($window, $parse, $timeout, $rootScope); }
+    ]);
