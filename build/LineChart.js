@@ -1316,6 +1316,7 @@ var n3Charts;
             };
             Container.prototype.updateContainer = function (options) {
                 this.dim.updateMargins(options);
+                this.dim.fromParentElement(this.element.parentElement);
                 this.vis
                     .attr({
                         'width': this.dim.innerWidth,
